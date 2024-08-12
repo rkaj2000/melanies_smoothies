@@ -27,9 +27,6 @@ ingredients_list = st.multiselect(
     ,my_dataframe
     ,max_selections=5
 )
-if len(ingredients_list) == 0 or len(ingredients_list) > 7:
-    st.write("You must select 5 or less ingredients")
-    st.stop()
 
 if ingredients_list:
     #st.write(ingredients_list)
@@ -43,9 +40,6 @@ if ingredients_list:
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
 
-    #st.write(my_insert_stmt)
-    #st.stop()
-    
     time_to_insert = st.button('Submit Order')
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
